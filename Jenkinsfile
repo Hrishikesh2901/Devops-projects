@@ -7,12 +7,6 @@ pipeline {
     }
 
     stages {
-        stage('Clone Repository') {
-            steps {
-                git url: 'https://github.com/Hrishikesh2901/Devops-projects.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 script {
@@ -32,9 +26,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh """
-                        docker run -d --name ${CONTAINER_NAME} -p 80:80 ${IMAGE_NAME}
-                    """
+                    sh "docker run -d --name ${CONTAINER_NAME} -p 80:80 ${IMAGE_NAME}"
                 }
             }
         }
